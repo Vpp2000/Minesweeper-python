@@ -29,8 +29,9 @@ if __name__ == '__main__':
 
     for x in range(settings.GRID_SIZE):
         for y in range(settings.GRID_SIZE):
-            cell = Cell(text=f"{y}-{x}")
+            cell = Cell(x=x, y=y, text=f"y={y} x={x}")
             cell.create_btn_object(center_fame)
             cell.cell_btn_object.grid(column=x, row=y)
 
+    Cell.randomized_mines()
     root.mainloop()
