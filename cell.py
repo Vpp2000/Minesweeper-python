@@ -1,6 +1,8 @@
 from tkinter import Button
 import random
 
+import settings
+
 
 class Cell:
     game_cells = []
@@ -28,8 +30,7 @@ class Cell:
 
     @staticmethod
     def randomized_mines():
-        TOTAL_CELLS_CHOSEN = 9
-        picked_cells = random.sample(Cell.all, TOTAL_CELLS_CHOSEN)
+        picked_cells = random.sample(Cell.all, settings.MINES_IN_GAME)
 
         for picked_cell in picked_cells:
             picked_cell.is_mine = True
