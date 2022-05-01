@@ -15,20 +15,22 @@ if __name__ == '__main__':
     top_frame = Frame(root, bg="red", width=settings.WIDTH, height=utils.height_prct(25))
     top_frame.place(x=0, y=0)
 
-    left_frame = Frame(root, bg='black', width=utils.width_prct(25), height=utils.height_prct(75))
+    left_frame = Frame(root, bg='blue', width=utils.width_prct(25), height=utils.height_prct(75))
     left_frame.place(x=0, y=utils.height_prct(25))
 
     center_fame = Frame(
         root,
-        bg="green",
+        bg="black",
         width=utils.width_prct(75),
         height=utils.height_prct(75)
     )
 
     center_fame.place(x=utils.width_prct(25), y=utils.height_prct(25))
 
-    c1 = Cell()
-    c1.create_btn_object(center_fame)
-    c1.cell_btn_object.place(x=0, y=0)
+    for x in range(settings.GRID_SIZE):
+        for y in range(settings.GRID_SIZE):
+            cell = Cell(text=f"{y}-{x}")
+            cell.create_btn_object(center_fame)
+            cell.cell_btn_object.grid(column=x, row=y)
 
     root.mainloop()
