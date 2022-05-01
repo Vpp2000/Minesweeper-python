@@ -1,16 +1,20 @@
-# This is a sample Python script.
-
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
+from tkinter import *
+import settings
+import utils
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    root = Tk()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    root.configure(bg="black")
+    root.geometry(settings.ROOT_GEOMETRY_STR)
+    root.title("Minesweeper")
+    root.resizable(False, False)
+
+    top_frame = Frame(root, bg="red", width=settings.WIDTH, height=utils.height_prct(25))
+    top_frame.place(x=0, y=0)
+
+    left_frame = Frame(root, bg='blue', width=utils.width_prct(25), height=utils.height_prct(75))
+    left_frame.place(x=0, y=utils.height_prct(25))
+
+    root.mainloop()
