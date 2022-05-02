@@ -1,4 +1,4 @@
-from tkinter import Button
+from tkinter import Button, Label
 import random
 
 import settings
@@ -6,6 +6,8 @@ import settings
 
 class Cell:
     game_cells = []
+    cells_available = pow(settings.GRID_SIZE, 2)
+    cell_count_label_object = None
 
     def __init__(self, x, y, text, is_mine=False):
         self.is_mine = is_mine
@@ -26,6 +28,10 @@ class Cell:
         if self.is_mine:
             self.show_mine()
         else:
+            if self.surrounded_mines_length == 0:
+                for cell in self.surrounded_cells:
+                    cell.show_cell()
+
             self.show_cell()
 
     def right_click_actions(self, event):
@@ -43,7 +49,19 @@ class Cell:
         self.cell_btn_object["bg"] = "red"
 
     def show_cell(self):
-        self.cell_btn_object['text'] = self.surrounded_mines_length
+        Cell.cells_available = Cell.cells_available - 1
+        Cell.cell_count_label_object['text'] = f'There are {Cell.cells_available} cells'
+        if self.surrounded_mines_length > 0:
+            self.cell_btn_object['text'] = self.surrounded_mines_length
+        else:
+            self.cell_btn_object['text'] = 0
+
+        self.cell_btn_object['bg'] = 'gray'
+
+    @staticmethod
+    def create_cell_count_label(parent_location):
+        label = Label(parent_location, bg='black', fg='white', text=f'There are {Cell.cells_available} cells', font=('', 30))
+        Cell.cell_count_label_object = label
 
     @property
     def surrounded_cells(self):
